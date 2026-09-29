@@ -1,0 +1,56 @@
+{
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.format": "always"
+  },
+
+  "files.autoSave": "onFocusChange",
+  "editor.formatOnSave": true,
+  "eslint.codeActionsOnSave.mode": "all",
+
+  "js/ts.inlayHints.parameterNames.enabled": "literals",
+  "js/ts.inlayHints.variableTypes.enabled": true,
+  "js/ts.inlayHints.propertyDeclarationTypes.enabled": true,
+  "js/ts.inlayHints.parameterTypes.enabled": true,
+  "js/ts.inlayHints.functionLikeReturnTypes.enabled": true,
+  "js/ts.inlayHints.enumMemberValues.enabled": true,
+  "editor.inlayHints.enabled": "offUnlessPressed",
+
+  "workbench.tree.indent": 19,
+  "explorer.compactFolders": false,
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#832460",
+    "activityBar.activeBorder": "#e7e7e7",
+    "activityBar.background": "#832460",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#121907",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "activityBarTop.activeBackground": "#832460",
+    "activityBarTop.activeBorder": "#e7e7e7",
+    "activityBarTop.background": "#832460",
+    "activityBarTop.foreground": "#e7e7e7",
+    "activityBarTop.inactiveForeground": "#e7e7e799",
+    "commandCenter.border": "#e7e7e799",
+    "commandCenter.foreground": "#e7e7e7",
+    "sash.hoverBorder": "#832460",
+    "statusBar.background": "#5b1943",
+    "statusBar.debuggingBackground": "#5b1943",
+    "statusBar.debuggingForeground": "#e7e7e7",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBar.inactiveBackground": "#5b1943",
+    "statusBarItem.hoverBackground": "#832460",
+    "statusBarItem.remoteBackground": "#5c7d22",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#5b1943",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#5b194399",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#5b1943"
+}
