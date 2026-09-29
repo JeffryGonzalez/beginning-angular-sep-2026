@@ -1,10 +1,4 @@
 <app-page-header />
 <main class="container mx-auto my-auto">
-  <app-counter message="Number 1" />
-  <app-counter [message]="msg()" />
-  <app-counter [message]="msg()" />
-  <app-counter message="Bottom" />
-  <button (click)="msg.update((m) => m.toUpperCase())" type="button" class="btn btn-xl btn-accent">
-    Click Me
-  </button>
+  <router-outlet />
 </main>

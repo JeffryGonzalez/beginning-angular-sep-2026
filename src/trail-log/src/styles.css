@@ -6,3 +6,9 @@
     nord --default,
     dracula --prefersdark;
 }
+
+@layer components {
+  pre {
+    @apply p-4 bg-black text-green-500 font-mono m-4 border-2 border-red-600;
+  }
+}

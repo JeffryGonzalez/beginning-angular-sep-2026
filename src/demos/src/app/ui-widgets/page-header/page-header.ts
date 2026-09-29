@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Broom } from '../icons/broom';
 import { Bug } from '../icons/bug';
 import { Cake } from '../icons/cake';
-import { Broom } from '../icons/broom';
 
 @Component({
-  imports: [Bug, Cake, Broom],
+  imports: [Bug, Cake, Broom, RouterLink, RouterLinkActive],
   selector: 'app-page-header',
   styleUrl: './page-header.css',
   templateUrl: './page-header.html',

@@ -6,11 +6,9 @@ import { Counter } from './demos/counter';
 // "Metadata decorator" "@script"
 // [TestMethod], [HttpGet("/lunch")]
 @Component({
-  imports: [PageHeader, Counter],
+  imports: [PageHeader, RouterOutlet],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
-export class App {
-  msg = signal('Another');
-}
+export class App {}
