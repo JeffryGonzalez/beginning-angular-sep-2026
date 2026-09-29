@@ -322,7 +322,7 @@ import { TitleCasePipe } from '@angular/common';
   styles: ``,
 })
 export class TrailStats {
-     trailList = input.required<Trail[]>();
++  trailList = input.required<Trail[]>();
 
   protected readonly trailStats = computed(() => {
     const trails = this.trailList();
@@ -382,12 +382,13 @@ First we'll make a little tweak to the `trail-card` component's CSS:
 
 Also, let's update the `trails-list` template to use the `trail-card` component:
 
+> Note: the input [trail] is what you do in the next section
 ```html
 <div class="flex flex-col md:flex-row gap-4">
   <app-trail-stats [trailList]="trails()"> </app-trail-stats>
   <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 w-fit gap-4">
     @for (trail of trails(); track trail.name) {
-      <app-trails-trail-card class="" />
+      <app-trails-trail-card [trail]="trail()"/>
     }
   </div>
 </div>
