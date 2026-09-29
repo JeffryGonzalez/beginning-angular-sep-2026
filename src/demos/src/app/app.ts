@@ -11,4 +11,6 @@ import { Counter } from './demos/counter';
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
-export class App {}
+export class App {
+  msg = signal('Another');
+}
