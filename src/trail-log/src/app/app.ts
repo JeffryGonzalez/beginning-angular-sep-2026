@@ -1,12 +1,10 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { PageHeader } from './headings/page-header/page-header';
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [PageHeader],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
-export class App {
-  protected readonly title = signal('Beginning Angular!! ');
-}
+export class App {}
