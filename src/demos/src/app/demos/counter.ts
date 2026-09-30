@@ -1,5 +1,4 @@
-import { Component, computed, effect, inject, input, signal } from '@angular/core';
-import { EvenOrOdd } from './even-or-odd';
+import { Component, inject } from '@angular/core';
 import { CounterButtonDirective } from '../ui-widgets/counter-button';
 import { CounterStore } from './counter-store';
 
@@ -9,7 +8,7 @@ import { CounterStore } from './counter-store';
   providers: [],
   template: `
     <button (click)="store.decrement()" appCounterButton="decrement">-</button>
-    <p>Currently at {{ store.current() }}</p>
+    <p>Current count is {{ store.current() }}</p>
     <button (click)="store.increment()" appCounterButton="increment">+</button>
   `,
   styles: ``,

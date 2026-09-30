@@ -9,6 +9,8 @@ type CounterState = {
   by: CountByValues;
 };
 
+// higher-order functions - any function that takes a function as an argument and/or returns a function
+// customers.Where(c => c.CreditLimit > 5000M);
 export const CounterStore = signalStore(
   withState<CounterState>({
     current: 0,

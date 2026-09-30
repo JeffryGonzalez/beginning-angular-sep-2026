@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PageHeader } from './headings/page-header/page-header';
+
 import { TrailList } from './trails/trails-list';
 
 @Component({

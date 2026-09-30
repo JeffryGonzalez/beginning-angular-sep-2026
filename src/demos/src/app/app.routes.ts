@@ -21,6 +21,10 @@ export const routes: Routes = [
     component: Piping,
   },
   {
+    path: 'customers',
+    loadChildren: () => import('./areas/customers/customers-routes').then((c) => c.customerRoutes),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },

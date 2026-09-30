@@ -1,56 +1,33 @@
-import { JsonPipe } from '@angular/common';
-import { Component, isDevMode, signal } from '@angular/core';
-import { TrailStats } from './trail-stats';
-import { Trail } from './types';
+import { Component, inject } from '@angular/core';
 import { TrailCard } from './trail-card';
+import { TrailStats } from './trail-stats';
+import { TrailsPrefs } from './trails-prefs';
+import { TrailsStore } from './trails-store';
 
 @Component({
   selector: 'app-trails-list',
-  imports: [TrailStats, TrailCard],
+  imports: [TrailStats, TrailCard, TrailsPrefs],
   template: `
-    <div class="flex flex-col md:flex-row gap-4">
-      <app-trail-stats [trailList]="trails()"> </app-trail-stats>
-      <div class="grid grid-cols-1  lg:grid-cols-2 2xl:grid-cols-4 w-fit gap-4">
-        @for (trail of trails(); track trail.name) {
-          <app-trails-trail-card [trail]="trail" />
-        }
+    <app-trails-prefs />
+    @if (store.trailsResource.isLoading()) {
+      <div class="alert alert-info">
+        <p>Getting your trails...hang tite!</p>
       </div>
-    </div>
+    } @else {
+      <div class="flex flex-col md:flex-row gap-4 ">
+        <app-trail-stats [trailList]="store.trails()"> </app-trail-stats>
+        <div class="grid grid-cols-1  lg:grid-cols-2 2xl:grid-cols-4 w-fit gap-4">
+          @for (trail of store.trails(); track trail.name) {
+            <app-trails-trail-card [trail]="trail" />
+          } @empty {
+            <p>No trails match your filters!</p>
+          }
+        </div>
+      </div>
+    }
   `,
   styles: ``,
 })
 export class TrailList {
-  iAmDeveloping = isDevMode();
-  protected readonly trails = signal<Trail[]>([
-    {
-      name: 'Woodpecker Way Loop',
-      miles: 1.8,
-      difficulty: 'easy',
-      favorite: true,
-    },
-    {
-      name: 'Eagle Rock Trail',
-      miles: 3.2,
-      difficulty: 'moderate',
-      favorite: true,
-    },
-    {
-      name: 'Bear Creek Trail',
-      miles: 2.5,
-      difficulty: 'hard',
-      favorite: false,
-    },
-    {
-      name: 'Cedar Ridge Trail',
-      miles: 4.1,
-      difficulty: 'extreme',
-      favorite: false,
-    },
-    {
-      name: 'Pine Valley Trail',
-      miles: 5.0,
-      difficulty: 'moderate',
-      favorite: false,
-    },
-  ]);
+  protected readonly store = inject(TrailsStore);
 }
