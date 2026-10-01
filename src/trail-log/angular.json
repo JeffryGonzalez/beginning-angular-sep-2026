@@ -81,6 +81,9 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+           "options": {
+      "allowedHosts": ["aspire.dev.internal"]
+    },
           "configurations": {
             "production": {
               "buildTarget": "trail-log:build:production"

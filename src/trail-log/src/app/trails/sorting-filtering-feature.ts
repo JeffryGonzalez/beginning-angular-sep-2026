@@ -1,6 +1,13 @@
-import { inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { patchState, signalStoreFeature, withHooks, withMethods, withState } from '@ngrx/signals';
+import { effect, inject } from '@angular/core';
+import { Params, Router } from '@angular/router';
+import {
+  patchState,
+  signalStoreFeature,
+  withHooks,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
 
 const sortByOptions = ['name', 'mileage'] as const;
 const sortOrderOptions = ['asc', 'desc'] as const;
@@ -23,50 +30,47 @@ export function withSortingAndFiltering() {
       sortOrder: 'asc',
       filter: 'all',
     }),
-    withMethods(() => {
+    withProps(() => ({
+      _router: inject(Router),
+    })),
+    withMethods((store) => {
       // "injection context"
       const router = inject(Router);
       return {
         setSortBy: (sortBy: SortByOption) => {
           router.navigate([], { queryParams: { sortBy: sortBy }, queryParamsHandling: 'merge' });
+          patchState(store, { sortBy: sortBy });
         },
         setSortOrder: (sortOrder: SortOrderOption) => {
           router.navigate([], {
             queryParams: { sortOrder: sortOrder },
             queryParamsHandling: 'merge',
           });
+          patchState(store, { sortOrder: sortOrder });
         },
         setFilter: (filter: FilterOption) => {
           router.navigate([], { queryParams: { filter: filter }, queryParamsHandling: 'merge' });
+          patchState(store, { filter: filter });
+        },
+        _updateQueryParams: (queryParams: Params) => {
+          if (queryParams['sortBy'] && sortByOptions.includes(queryParams['sortBy'])) {
+            patchState(store, { sortBy: queryParams['sortBy'] });
+          }
+          if (queryParams['sortOrder'] && sortOrderOptions.includes(queryParams['sortOrder'])) {
+            patchState(store, { sortOrder: queryParams['sortOrder'] });
+          }
+          if (queryParams['filter'] && filterOptions.includes(queryParams['filter'])) {
+            patchState(store, { filter: queryParams['filter'] });
+          }
         },
       };
     }),
     withHooks({
       onInit(store) {
-        const router = inject(Router);
-        // a stream of observable things over time.
-        router.events.subscribe(() => {
-          // if (e instanceof NavigationEnd) {
-          //   console.log({ url: e.url, ar: e.urlAfterRedirects });
-          // }
-          const currentNavigation = router.currentNavigation();
-          const queryParams = currentNavigation?.extras.queryParams || {};
-          console.log(queryParams);
-
-          if (queryParams['sortBy']) {
-            if (sortOrderOptions.includes(queryParams['sortBy'])) {
-              patchState(store, { sortBy: queryParams['sortBy'] });
-            }
-          }
-          if (queryParams['sortOrder']) {
-            if (sortOrderOptions.includes(queryParams['sortOrder'])) {
-              patchState(store, { sortOrder: queryParams['sortOrder'] });
-            }
-          }
-          if (queryParams['filter']) {
-            if (filterOptions.includes(queryParams['filter'])) {
-              patchState(store, { filter: queryParams['filter'] });
-            }
+        effect(() => {
+          const cn = store._router.currentNavigation();
+          if (cn?.initialUrl?.queryParams) {
+            store._updateQueryParams(cn.initialUrl.queryParams);
           }
         });
       },

@@ -25,7 +25,7 @@ export const TrailsStore = signalStore(
   withProps(() => ({
     // TODO: I *swear* I will fix this tomorrow- classroom crap - do not hard-code urls. duh.
     // httpResource was "experimental" until Angular 22 (I've been using it for about a year.)
-    trailsResource: httpResource<ApiTrail[]>(() => 'http://localhost:1337/trails'),
+    trailsResource: httpResource<ApiTrail[]>(() => '/api/trails'),
   })),
   withState<TrailsState>(initialTrailsState), // here's the data I want to store in this "store"
   withSortingAndFiltering(),
