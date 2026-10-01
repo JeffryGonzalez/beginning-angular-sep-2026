@@ -3,9 +3,7 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "schematicCollections": [
-      "angular-eslint"
-    ],
+    "schematicCollections": ["angular-eslint", "playwright-ng-schematics"],
     "analytics": false
   },
   "newProjectRoot": "projects",
@@ -80,6 +78,9 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+            "allowedHosts": ["aspire.dev.internal"]
+          },
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
@@ -95,6 +96,17 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
+        },
+        "e2e": {
+          "builder": "playwright-ng-schematics:playwright",
+          "options": {
+            "devServerTarget": "trail-log:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "trail-log:serve:production"
+            }
           }
         }
       }
